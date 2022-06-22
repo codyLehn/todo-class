@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const db = mongoose.connection;
 
 function connect(user, password, host, port, db) {
-  const connectionString = `mongodb+srv://user:password@cluster0.kygdq0t.mongodb.net/?retryWrites=true&w=majority`;
+  const connectionString = `mongodb+srv://user:pass@cluster0.kygdq0t.mongodb.net/?retryWrites=true&w=majority`;
 
   mongoose.connect(connectionString, {
     useNewUrlParser: true,

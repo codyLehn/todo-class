@@ -7,6 +7,7 @@ app.use(express.json());
 const mongodb = require('./persist/mongo');
 
 const Todo = require('./persist/todo');
+// const helpers = require('./helper');
 
 //put in command line flags
 const flags = require('flags');
@@ -62,8 +63,13 @@ app.post('/todo', (req, res) => {
 
 app.delete('/todo/:id', (req, res) => {
   const id = req.params.id;
-  Todo.findByIdAndDelete()
-    .then()
+  Todo.findByIdAndDelete(id, req.body)
+    .then((todo) => {
+      if (todo == null) {
+        res.status(404).json({ message: 'not found' });
+      }
+      res.json(todo);
+    })
     .catch((err) => {
       res.status(500).json(err);
     });
@@ -71,7 +77,8 @@ app.delete('/todo/:id', (req, res) => {
 
 app.put('/todo/:id', (req, res) => {
   const id = req.params.id;
-  const vTodo = helpers.setUpTodo(req.body);
+  // const vTodo = helpers.setUpTodo(req.body);
+  const vTodo = req.body;
   Todo.findByIdAndUpdate(id, vTodo)
     .then((todo) => {
       if (todo == null) {
