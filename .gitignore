@@ -130,3 +130,6 @@ dist
 .pnp.*
 ## Mac Stuff
 .DS_Store
+
+## VS Code spellcheck
+.vscode/
